@@ -20,15 +20,6 @@ def rotation(position, direction, steps):
         temp = 100 - st + position
     return temp % 100
 
-# this block is to consider just the last 2 digits (if numbers are greater than 99)
-# temp = '133453234625'
-# if len(temp) > 2:
-#     print(int(temp[-2:]))
-# else:
-#     print(int(temp))
-# while(temp > 99):
-#     temp = temp - 100
-
 for row in rows:
     starting_point = rotation(starting_point, row[0], row[1])
     if starting_point == 0:
