@@ -20,6 +20,7 @@ def rotation(position, direction, steps):
         temp = 100 - st + position
     return temp % 100
 
+
 for row in rows:
     starting_point = rotation(starting_point, row[0], row[1])
     if starting_point == 0:
