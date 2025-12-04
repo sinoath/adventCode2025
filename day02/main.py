@@ -26,7 +26,16 @@ for id_range in id_ranges:
     maybe_faulty_ids.append(temp)
 
 
+for id in maybe_faulty_ids:
+    start = int(id[0])
+    end = int(id[1])
+    for i in range (start, end + 1):
+        if match_split(str(i)):
+            faulty_ids.append(str(i))
+            sum_ids += i
+
+
 print(id_ranges, '\n')
 print(maybe_faulty_ids, '\n')
-print('''Lenght of id ranges {},
-lenght of cleaned {}'''.format(len(id_ranges), len(maybe_faulty_ids)))
+print('''Lenght of id ranges {}'''.format(len(id_ranges), len(maybe_faulty_ids)))
+print(f"Sum of faulty IDs: {sum_ids}")
