@@ -19,4 +19,10 @@ maybe_faulty_ids = []
 faulty_ids = []
 sum_ids = 0
 
-print(id_ranges)
+
+# Splitting the begin and end of the range
+for id_range in id_ranges:
+    temp = id_range.split('-')
+    maybe_faulty_ids.append(temp)
+
+
