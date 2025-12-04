@@ -26,3 +26,7 @@ for id_range in id_ranges:
     maybe_faulty_ids.append(temp)
 
 
+print(id_ranges, '\n')
+print(maybe_faulty_ids, '\n')
+print('''Lenght of id ranges {},
+lenght of cleaned {}'''.format(len(id_ranges), len(maybe_faulty_ids)))
