@@ -1,0 +1,42 @@
+file = open('./input1.txt', 'r')
+# file = open('./test1.txt', 'r')
+content_of_file = ''
+for line in file:
+    content_of_file = line[:-1]
+file.close()
+
+
+def match_split(id:str):
+    '''Check if the first half of a string is equal to the second half'''
+    half = len(id) // 2
+    first_half = id[:half]
+    second_half = id[half:]
+    return first_half == second_half
+
+
+# Variables
+id_ranges = content_of_file.split(',')
+maybe_faulty_ids = []
+faulty_ids = []
+sum_ids = 0
+
+
+# Splitting the begin and end of the range
+for id_range in id_ranges:
+    temp = id_range.split('-')
+    maybe_faulty_ids.append(temp)
+
+
+for id in maybe_faulty_ids:
+    start = int(id[0])
+    end = int(id[1])
+    for i in range (start, end + 1):
+        if match_split(str(i)):
+            faulty_ids.append(str(i))
+            sum_ids += i
+
+
+print(id_ranges, '\n')
+print(maybe_faulty_ids, '\n')
+print('''Lenght of id ranges {}'''.format(len(id_ranges), len(maybe_faulty_ids)))
+print(f"Sum of faulty IDs: {sum_ids}")
