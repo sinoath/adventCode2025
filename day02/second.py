@@ -6,19 +6,28 @@ for line in file:
 file.close()
 
 
-def match_split(id:str):
-    '''Check if the first half of a string is equal to the second half'''
-    half = len(id) // 2
-    first_half = id[:half]
-    second_half = id[half:]
-    return first_half == second_half
-
-
 # Variables
 id_ranges = content_of_file.split(',')
 maybe_faulty_ids = []
 faulty_ids = []
 sum_ids = 0
+
+
+def match_split(id:str):
+    '''Check if a string is a repeated pattern of any number of chars
+    Input: str
+    Output: bool
+    '''
+    lenght = len(id)
+    quotient = 2
+    while lenght >= quotient:
+        if lenght % quotient == 0:
+            slice = lenght // quotient
+            pattern = id[:slice]
+            if id.count(pattern) == quotient:
+                return True
+        quotient += 1
+    return False
 
 
 # Splitting the begin and end of the range
@@ -36,7 +45,4 @@ for id in maybe_faulty_ids:
             sum_ids += i
 
 
-print(id_ranges, '\n')
-print(maybe_faulty_ids, '\n')
-print('''Lenght of id ranges {}'''.format(len(id_ranges), len(maybe_faulty_ids)))
 print(f"Sum of faulty IDs: {sum_ids}")
