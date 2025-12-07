@@ -7,7 +7,7 @@ f.close()
 # print(rows)
 quantity_of_digits = 12
 from_left = 0
-max_line_joltage = []
+max_per_line_joltage = []
 first_digit_pos = 0
 second_digit_pos = 0
 total_joltage = 0
