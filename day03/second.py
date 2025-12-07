@@ -13,6 +13,10 @@ total_joltage = 0
 
 
 def position_max_left_digit(s:str, start=0, end=-1):
+    '''Find the position of the leftmost greater number in a given string
+    Input: s: string, start: int, end: int
+    Output: postion: int
+    '''
     for i in range(9, -1, -1):
         position = s.find(str(i), start, end)
         if position != -1:
