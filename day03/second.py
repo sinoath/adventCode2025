@@ -20,24 +20,18 @@ def position_max_left_digit(s:str, start=0, end=-1):
     return -1
 
 
-def position_max_right_digit(s:str, index:int):
-    for i in range(9, -1, -1):
-        position = s.find(str(i), index)
-        if position != -1:
-            return position
-    return -1
-
-
+digit_position = 0
 for row in rows:
-    first_digit_pos = position_max_left_digit(row)
-    from_left = first_digit_pos + 1
-    second_digit_pos = position_max_right_digit(row, from_left)
-    max_line_joltage.append(row[first_digit_pos]+row[second_digit_pos])
-    # print(row, row[first_digit_pos]+row[second_digit_pos])
+    found = ''
+    for i in range(-quantity_of_digits, 1, 1):
+        digit_pos = position_max_left_digit(row, from_left, i)
+        found += row[digit_pos]
+        from_left = digit_pos + 1
+    max_per_line_joltage.append(found)
 
 
-for el in max_line_joltage:
+for el in max_per_line_joltage:
     total_joltage += int(el)
 
 
-print("Total joltage: ", total_joltage)
+print('total: ', total_joltage)
