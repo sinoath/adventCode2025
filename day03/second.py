@@ -1,10 +1,9 @@
 f = open('./input1.txt', 'r')
 rows = []
 for line in f:
-    rows.append(line[:-1])
+    rows.append(line)
 f.close()
 
-# print(rows)
 quantity_of_digits = 12
 from_left = 0
 max_per_line_joltage = []
