@@ -1,4 +1,4 @@
-f = open('./input1.txt', 'r')
+f = open('./test1.txt', 'r')
 rows = []
 for line in f:
     rows.append(line)
@@ -8,12 +8,18 @@ line_indexes = []
 line_lenght = len(rows[0])
 movable_paper_coordinates = []
 number_of_rows = len(rows)
-# Print the matrix and get all index positions of paper rolls '@'
+# Get all index positions of paper rolls '@'
 for row in rows:
     line_indexes.append([i for i in range(line_lenght) if row.startswith('@', i)])
-    print(row, end='')
-print()
 
+
+def print_matrix(lines):
+    for row in lines:
+        print(row, end='')
+    print()
+
+
+print_matrix(rows)
 first = line_indexes[0]
 last = line_indexes[-1]
 
@@ -24,9 +30,8 @@ for index in first:
     positions = [index-1, index+1, index]
     for pos in positions:
         if pos in line_indexes[1]: counter += 1
-    for pos in positions[:-1]: 
         if pos in first: counter += 1
-    if counter <= 3:
+    if counter <= 4:
         movable_paper_coordinates.append([0, index])
 
 
@@ -36,9 +41,8 @@ for index in last:
     positions = [index-1, index+1, index]
     for pos in positions:
         if pos in line_indexes[-2]: counter += 1
-    for pos in positions[:-1]: 
         if pos in last: counter += 1
-    if counter <= 3:
+    if counter <= 4:
         movable_paper_coordinates.append([number_of_rows -1, index])
 
 
@@ -49,22 +53,23 @@ for i in range(1, len(line_indexes) -1):
         positions = [index-1, index+1, index]
         for pos in positions:
             if pos in line_indexes[i-1]: counter += 1
-        for pos in positions:
             if pos in line_indexes[i+1]: counter += 1
-        if counter > 3:
-            continue
-        for pos in positions[:-1]:
             if pos in line_indexes[i]: counter += 1
-        if counter <= 3:
+        if counter <= 4:
             movable_paper_coordinates.append([i, index])
 
 
 
-for index in line_indexes:
-    print(index)
-
-
-for el in movable_paper_coordinates:
-    print(el)
+# for el in movable_paper_coordinates:
+#     print(el)
 # print('\n', first, '\n', last)
 print("Total movable paper rolls: ", len(movable_paper_coordinates))
+
+for el in movable_paper_coordinates:
+    s = rows[el[0]]
+    char_pos = el[1]
+    s = s[:char_pos] + 'x' + s[char_pos+1:]
+    rows[el[0]] = s
+
+
+print_matrix(rows)
