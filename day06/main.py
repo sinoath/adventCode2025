@@ -4,22 +4,32 @@ with open('./test1.txt', 'r') as f:
         content_of_file.append(line)
 
 
-print(content_of_file)
 horizontalList = []
 for el in content_of_file:
     horizontalList.append(el.split())
 operators = horizontalList[-1]
+horizontalList.pop(-1)
+print(horizontalList)
 print(operators)
 
-def combine(a:list, b:list, ops:list) -> list:
-    result = []
-    for i in range (len(a)):
-        if ops[i] == '*':
-            result.append(int(a[i]) * int(b[i]))
-        else:
-            result.append(int(a[i]) + int(b[i]))
-    return result
+result = []
+for op in operators:
+    if op == '+':
+        result.append(0)
+    else:
+        result.append(1)
 
-for i in range(len(operators) -1):
-    test = combine(horizontalList[0], horizontalList[1], operators)
-print(test)
+for lst in horizontalList:
+    for i in range(len(operators)):
+        if operators[i] == '+':
+            result[i] += int(lst[i])
+        else:
+            result[i] *= int(lst[i])
+    # test = combine(horizontalList[0], horizontalList[1], operators)
+print(result)
+
+granTotal = 0
+for el in result:
+    granTotal += el
+
+print(granTotal)
