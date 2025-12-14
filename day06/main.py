@@ -1,4 +1,4 @@
-with open('./test1.txt', 'r') as f:
+with open('./input1.txt', 'r') as f:
     content_of_file = []
     for line in f:
         content_of_file.append(line)
