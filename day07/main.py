@@ -1,10 +1,10 @@
-with open('./test1.txt') as f:
+with open('./input1.txt') as f:
     content_of_file = f.read()
 
 print(content_of_file)
 
 rows = []
-with open('./test1.txt') as f:
+with open('./input1.txt') as f:
     for line in f:
         rows.append(line.rstrip())
 
@@ -12,8 +12,8 @@ with open('./test1.txt') as f:
 def char_replace(c:str, s:str, i:int) -> str:
     '''Change the character in string "s" with index "i"
     with the character "c"
-    Input: str, str, list[int]
-    Output: str
+    Input: string, string, integer
+    Output: string
     '''
     if i < len(s):
         s = s[:i] + c + s[i+1:]
@@ -21,15 +21,8 @@ def char_replace(c:str, s:str, i:int) -> str:
 
 
 rows[0] = rows[0].replace("S", "|")
-beam_x = rows[0].find('|')
-# rows[1] = rows[1][:beam_x] + '|' + rows[1][beam_x+1:]
-rows[1] = char_replace('|', rows[1], beam_x)
+beam_x = {rows[0].find('|')}
 splitter_coords = []
-
-
-print()
-print(rows[0])
-print(rows[1])
 
 
 for line_id in range(len(rows)):
@@ -44,5 +37,26 @@ for coord in splitter_coords:
             coord[1].append(c)
 
 
-print(splitter_coords)
+deviation_beam = 0
 
+
+for l in range(1, len(rows)):
+    if l % 2 != 0:
+        for el in beam_x:
+            rows[l] = char_replace('|', rows[l], el)
+    else:
+        temp = set()
+        for i in range(len(rows[l])):
+            if rows[l][i] == '^' and i in beam_x:
+                deviation_beam += 1
+                beam_x.remove(i)
+                temp.add(i-1)
+                temp.add(i+1)
+        for t in temp:
+            beam_x.add(t)
+        for el in beam_x:
+            rows[l] = char_replace('|', rows[l], el)
+
+for el in rows:
+    print(el)
+print(deviation_beam)
