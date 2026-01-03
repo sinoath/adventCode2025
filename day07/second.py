@@ -1,10 +1,10 @@
-with open('./test1.txt') as f:
+with open('./input1.txt') as f:
     content_of_file = f.read()
 
 print(content_of_file)
 
 rows = []
-with open('./test1.txt') as f:
+with open('./input1.txt') as f:
     for line in f:
         rows.append(line.rstrip())
 
