@@ -37,27 +37,31 @@ for coord in splitter_coords:
             coord[1].append(c)
 
 
-deviation_beam = 0
+deviation_beam = [ 1 if i in beam_x else 0 for i in range(len(rows[0]))]
 
 
-timelines = []
-for l in range(1, len(rows)):
-    if l % 2 != 0:
-        for el in beam_x:
-            rows[l] = char_replace('|', rows[l], el)
+for line_num in range(1, len(rows)):
+    if line_num % 2 != 0:
+        for ray in beam_x:
+            rows[line_num] = char_replace('|', rows[line_num], ray)
     else:
         temp = set()
-        for i in range(len(rows[l])):
-            if rows[l][i] == '^' and i in beam_x:
-                deviation_beam += 1
-                beam_x.remove(i)
-                temp.add(i-1)
-                temp.add(i+1)
+        for cell in range(len(rows[line_num])):
+            if rows[line_num][cell] == '^' and cell in beam_x:
+                beam_x.remove(cell)
+                temp.add(cell-1)
+                deviation_beam[cell-1] += deviation_beam[cell]
+                temp.add(cell+1)
+                deviation_beam[cell+1] += deviation_beam[cell]
+                deviation_beam[cell] = 0
         for t in temp:
             beam_x.add(t)
-        for el in beam_x:
-            rows[l] = char_replace('|', rows[l], el)
+        for ray in beam_x:
+            rows[line_num] = char_replace('|', rows[line_num], ray)
 
-for el in rows:
-    print(el)
-print(deviation_beam)
+
+total = 0
+for x in deviation_beam:
+    total += x
+
+print(total)
