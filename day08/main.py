@@ -3,18 +3,15 @@ with open('./test1.txt') as f:
     for line in f:
         junctions.append(line.strip())
 
-with open('./test1.txt') as f:
-    conten_of_file = f.read()
 
-
-def parse_numbers(s) -> list:
-    '''Get a string of 2 number separated by a comma and return a list
-    with the three integer as elements'''
+def parse_numbers(s) -> tuple:
+    '''Get a string of 2 number separated by a comma and return a tuple
+    with the three integer as coordinates'''
     coords = []
     temp = s.split(',')
     for t in temp:
         coords.append(int(t))
-    return coords
+    return tuple(coords)
 
 
 def get_distance(a, b) -> float:
