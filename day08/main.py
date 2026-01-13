@@ -20,7 +20,7 @@ def get_distance(a, b) -> float:
     return square**(1/2)
 
 
-def closest(coord, all_coords:list):
+def closest_distance(coord, all_coords:list) -> tuple:
     '''Input a junction's coordinates "coord" and all the other coordinates,
     output the closest (to coords) junctions's coordinates'''
     temp = [x for x in all_coords]
@@ -30,10 +30,12 @@ def closest(coord, all_coords:list):
     min_distance = get_distance(coord, closest)
     for t in temp:
         distance = get_distance(coord, t)
-        if distance < min_distance:
-            closest = t
+        if distance < min_distance and distance > 0:
             min_distance = distance
-    return closest
+            closest = t
+    return (coord, closest, min_distance)
+
+
 
 
 coordinates = []
