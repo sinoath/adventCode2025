@@ -44,4 +44,10 @@ coordinates = []
 for junction in junctions:
     coordinates.append(parse_numbers(junction))
 
-print(coordinates)
+
+pairs_closest = []
+for coord in coordinates:
+    clst = closest_distance(coord, coordinates)
+    if (clst[1], clst[0], clst[2]) not in pairs_closest:
+        pairs_closest.append(clst)
+
