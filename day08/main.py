@@ -36,6 +36,8 @@ def closest_distance(coord, all_coords:list) -> tuple:
     return (coord, closest, min_distance)
 
 
+def my_key_func(t:tuple):
+    return t[2]
 
 
 coordinates = []
