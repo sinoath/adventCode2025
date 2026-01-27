@@ -51,3 +51,47 @@ for coord in coordinates:
     if (clst[1], clst[0], clst[2]) not in pairs_closest:
         pairs_closest.append(clst)
 
+# for el in pairs_closest:
+#     print(el)
+pairs_closest.sort(key=my_key_func)
+# for el in pairs_closest:
+#     print(el)
+
+all_junctions = []
+ten_pairs = []
+for i in range(10):
+    ten_pairs.append(pairs_closest[i])
+    print(pairs_closest[i])
+all_junctions.append(set([pairs_closest[0][0], pairs_closest[0][1]]))
+for pair in ten_pairs:
+    first, second = pair[0], pair[1]
+    # print(first,second)
+    if all_junctions == []:
+        all_junctions.append(set([first, second]))
+    else:
+        for j in all_junctions:
+            if first in j and second in j:
+                break
+            elif first in j or second in j:
+                j.add(first)
+                j.add(second)
+                break
+            else:
+                all_junctions.append(set([first, second]))
+
+
+for el in all_junctions:
+    print(el)
+#
+# dimension_junction = []
+# for j in all_junctions:
+#     dimension_junction.append(len(j))
+# dimension_junction.sort(reverse=True)
+# print(dimension_junction)
+#
+# result = 1
+# for i in range(3):
+#     result *= dimension_junction[i]
+#
+# print(result)
+#
